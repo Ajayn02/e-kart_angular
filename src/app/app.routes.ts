@@ -14,6 +14,6 @@ export const routes: Routes = [
     {path:"log",component:LogComponent},
     {path:"wish",component:WishComponent},
     {path:"cart",component:CartComponent},
-    {path:"det",component:DetailsComponent},
+    {path:"det/:id",component:DetailsComponent},
 
 ];

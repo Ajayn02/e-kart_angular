@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ApiService } from '../services/api.service';
+import { ToastrService } from 'ngx-toastr';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup ,FormBuilder,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reg',
@@ -10,4 +14,9 @@ import { RouterLink } from '@angular/router';
 })
 export class RegComponent {
 
+  // regForm:FormGroup
+
+  constructor(private api:ApiService , private toastr:ToastrService){}
+  
+  
 }

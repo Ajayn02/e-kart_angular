@@ -11,22 +11,23 @@
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" *ngIf="products.length>0">
+
+            <div class="col mb-5" *ngFor="let i of products">
                 <div class="card h-100">
                     <!-- Product image-->
 
-                    <a routerLink="/det">
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <a routerLink="/det/{{i._id}}">
+                        <img class="card-img-top" src="{{i.image}}" height="250px" alt="..." />
 
-                    </a> 
+                    </a>
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder">Fancy Product</h5>
+                            <h5 class="fw-bolder">{{i.title.slice(0,10)}}...  </h5>
                             <!-- Product price-->
-                            $40.00 - $80.00
+                            ${{i.price}}
                         </div>
                     </div>
                     <!-- Product actions-->
@@ -35,13 +36,18 @@
                             <a class="btn btn-outline-dark mt-auto" routerLink="">
                                 <i class="fa-solid fa-heart-circle-plus" style="color: #dd2739;"></i>
                             </a>
-                            <a class="btn btn-outline-dark mt-auto" routerLink=""> 
+                            <a class="btn btn-outline-dark mt-auto" routerLink="">
                                 <i class="fa-solid fa-cart-plus"></i>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+        </div>
+        <div *ngIf="products.length<=0">
+            <h3 class="text-danger text-center">No Products Available</h3>
         </div>
     </div>
 </section>
