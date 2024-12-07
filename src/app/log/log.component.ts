@@ -33,6 +33,7 @@ export class LogComponent {
         // console.log(res);
         sessionStorage.setItem('token',res.token)
         sessionStorage.setItem('user',res.username)
+        this.api.getWishCount()
         this.toaster.success("Login Success")
         this.router.navigateByUrl('')
       },

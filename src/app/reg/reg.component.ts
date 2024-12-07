@@ -8,7 +8,7 @@ import { FormGroup ,FormBuilder,Validators } from '@angular/forms';
 @Component({
   selector: 'app-reg',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink,ReactiveFormsModule],
   templateUrl: './reg.component.html',
   styleUrl: './reg.component.css'
 })

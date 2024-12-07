@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ApiService } from '../services/api.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-header',
@@ -9,5 +11,16 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+
+  wCount:any=''
+
+  constructor(private api:ApiService){
+    this.api.wishcount.subscribe({
+      next:(res:any)=>{
+        // console.log(res);
+        this.wCount=res
+      }
+    })
+  }
 
 }
