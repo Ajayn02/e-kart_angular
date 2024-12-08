@@ -3,7 +3,7 @@
 <div class="container-fluid mt-3" style="min-height: 90vh;">
     <div class="row">
         <div class="col-9">
-            <table class="table table-borderd">
+            <table class="table table-borderd"  *ngIf="cartlist?.length>0"  >
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -15,33 +15,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>iPhone</td>
+                    <tr  *ngFor="let i of cartlist" >
+                        <td>{{i?.id}}</td>
+                        <td>{{i?.title}}</td>
                         <td>
-                            <img src="https://upload.wikimedia.org/wikipedia/en/e/ee/Front_%26_Back_Face_of_iPhone_16_Pro_Max.png" height="200px" alt="">
+                            <img src="{{i.image}}" height="200px" alt="">
                         </td>
                         <td>
-                            <button class="btn ">-</button>
-                            <span class="border rounded px-2 text-center">2 </span>
-                            <button class="btn ">+</button>
+                            <button class="btn "  (click)="handleDecreaseQuantity(i._id)" >-</button>
+                            <span class="border rounded px-2 text-center">{{i.quantity}}</span>
+                            <button class="btn " (click)="handleIncreaseQuantity(i._id)" >+</button>
                         </td>
                         <td>
-                            50000
+                            {{i?.price}}
                         </td>
                         <td>
-                            <button class="btn">
+                            <button class="btn" (click)="handleDeleteCart(i._id)">
                                 <i class="fa-solid fa-trash" style="color: #ea0606;"></i>
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <h2 class="text-center my-4 text-warning" *ngIf="cartlist?.length<=0"  >No Items Added Yet</h2>
         </div>
         <div class="col-3 ">
             <div class="w-100 rounded shadow px-2 py-4">
-                <h6>Total Items : <span class="text-warning">2</span></h6>
-                <h6>Total Amoout : <span class="text-warning">10000</span></h6>
+                <h6>Total Items : <span class="text-warning">{{cartlist?.length}}</span></h6>
+                <h6>Total Amount : <span class="text-warning">{{totalAmnt}}</span></h6>
                 <div class="border p-2 text-center border-info">
                     <button class="btn btn-link">Click For Offers</button>
                 </div>

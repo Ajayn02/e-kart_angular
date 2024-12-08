@@ -60,4 +60,26 @@ export class ApiService {
 
   }
 
+  // cart
+
+  addToCartApi(data:any){
+    return this.http.post(`${this.base_url}/addcart`,data,this.appendTokenToHeader())
+  }
+
+  getCartApi(){
+    return this.http.get(`${this.base_url}/cartlist`,this.appendTokenToHeader())
+  }
+
+  removeFromCartApi(id:any){
+    return this.http.delete(`${this.base_url}/delcart/${id}`,this.appendTokenToHeader())
+  }
+
+  increaseCartApi(id:any){
+    return this.http.get(`${this.base_url}/increcart/${id}`,this.appendTokenToHeader())
+  }
+
+  decreaseCartApi(id:any){
+    return this.http.get(`${this.base_url}/decrecart/${id}`,this.appendTokenToHeader())
+  }
+
 }

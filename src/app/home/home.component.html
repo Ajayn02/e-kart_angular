@@ -32,13 +32,13 @@
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center d-flex justify-content-between" (click)="handleAddWish(i)" >
-                            <a class="btn btn-outline-dark mt-auto" routerLink="">
+                        <div class="text-center d-flex justify-content-between"  >
+                            <button class="btn btn-outline-dark mt-auto"  (click)="handleAddWish(i)">
                                 <i class="fa-solid fa-heart-circle-plus" style="color: #dd2739;"></i>
-                            </a>
-                            <a class="btn btn-outline-dark mt-auto" routerLink="">
+                            </button>
+                            <button class="btn btn-outline-dark mt-auto"  (click)="addCart(i)">
                                 <i class="fa-solid fa-cart-plus"></i>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
