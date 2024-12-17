@@ -1,0 +1,25 @@
+<app-header/>
+<div class="container-fluid d-flex justify-content-center align-items-center" style="height: 85vh;">
+    <div class="w-50 rounded shadow px-4 py-2">
+        <form action="" *ngIf="!checkStatus">
+            <h3 class="text-center text-primary my-3">CheckOut Form</h3>
+            <input type="text" name="nm" [(ngModel)]="checkform.name" class="form-control mb-3" placeholder="Enter Name">
+            <input type="text" name="add" [(ngModel)]="checkform.address" class="form-control mb-3" placeholder="Enter Address">
+            <input type="text" name="ph" [(ngModel)]="checkform.phone" class="form-control mb-3" placeholder="Enter Phone Number">
+            <div class="d-flex justify-content-between mb-3 ">
+                <button class="btn btn-danger">Cancel</button>
+                <button class="btn btn-success"(click)="proceedToPay()" >Proceed to Pay</button>
+            </div>
+        </form>
+        <div class="p-3 " *ngIf="checkStatus"  >
+            <h3 class=''>CheckOut Details</h3>
+            <p>Name : {{checkform.name}}</p>
+            <p>Address : {{checkform.address}}</p>
+            <p>Phone : {{checkform.phone}}</p>
+            <h4 class="text-success"> Payable Amount : RS <span class="fw-bold">{{totalamount}}</span></h4>
+            <div class="mt-3 p-2">
+                <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+            </div>
+        </div>
+    </div>
+</div>

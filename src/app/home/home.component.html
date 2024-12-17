@@ -13,7 +13,7 @@
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" *ngIf="products.length>0">
 
-            <div class="col mb-5" *ngFor="let i of products">
+            <div class="col mb-5" *ngFor="let i of products|searchkey:keyword  ">
                 <div class="card h-100">
                     <!-- Product image-->
 
@@ -42,6 +42,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div *ngIf="(products|searchkey:keyword).length==0" style="min-height: 50vh;">
+                <h2 class="text-center text-danger">No Products Available</h2>
             </div>
 
 

@@ -5,17 +5,20 @@ import { ApiService } from '../services/api.service';
 import { OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { SearchkeyPipe } from '../pipes/searchkey.pipe';
+import { error } from 'console';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, RouterLink, NgFor, NgIf],
+  imports: [HeaderComponent, RouterLink, NgFor, NgIf,SearchkeyPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
 
   products: any = []
+  keyword:any=''
 
   constructor(private api: ApiService, private toastr: ToastrService) { }
 
@@ -28,6 +31,16 @@ export class HomeComponent implements OnInit {
       error: (err: any) => {
         console.log(err);
 
+      }
+    })
+    
+    this.api.serachkey.subscribe({
+      next:(res:any)=>{
+        this.keyword=res
+      },
+      error:(err:any)=>{
+        console.log(err);
+        
       }
     })
   }
@@ -60,6 +73,7 @@ export class HomeComponent implements OnInit {
       this.api.addToCartApi(data).subscribe({
         next: (res: any) => {
           this.toastr.success(res)
+          this.api.getCartCount()
         },
         error: (err: any) => {
           if (err.error) {

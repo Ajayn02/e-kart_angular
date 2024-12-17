@@ -8,18 +8,30 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ApiService {
 
-  base_url='http://localhost:3000'
+  base_url='https://e-kart-server-f9xj.onrender.com'
 
   wishcount:any=new BehaviorSubject(0)
+  cartCount:any=new BehaviorSubject(0)
+
+  serachkey:any=new BehaviorSubject("")
 
   constructor(private http:HttpClient) {
       this.getWishCount()
+      this.getCartCount()
    }
 
   getWishCount(){
     this.getWishApi().subscribe({
       next:(res:any)=>{
         this.wishcount.next(res.length)
+      }
+    })
+  }
+
+  getCartCount(){
+    this.getCartApi().subscribe({
+      next:(res:any)=>{
+        this.cartCount.next(res.length)
       }
     })
   }
@@ -81,5 +93,19 @@ export class ApiService {
   decreaseCartApi(id:any){
     return this.http.get(`${this.base_url}/decrecart/${id}`,this.appendTokenToHeader())
   }
+
+  emptycartApi(){
+    return this.http.delete(`${this.base_url}/emptycart`,this.appendTokenToHeader())
+  }
+
+  checkLogin(){
+    if(sessionStorage.getItem("token")){
+      return true
+    }else{
+      return false
+    }
+  }
+
+
 
 }

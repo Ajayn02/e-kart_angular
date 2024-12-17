@@ -4,6 +4,7 @@ import { ApiService } from '../services/api.service';
 import { OnInit } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -16,8 +17,33 @@ export class CartComponent implements OnInit {
 
   cartlist: any = []
   totalAmnt:any=0
+  offerStatus:boolean=false
+  oStatus:boolean=false
+  offerPrice:any=0
 
-  constructor(private api: ApiService, private toastr: ToastrService) { }
+  constructor(private api: ApiService, private toastr: ToastrService , private router:Router) { }
+
+  changeStatus(){
+    this.offerStatus=!this.offerStatus
+  }
+
+  discount50(){
+    this.offerPrice=this.totalAmnt*0.5
+    this.totalAmnt-=this.offerPrice
+    this.oStatus=true
+  }
+
+  discount20(){
+    this.offerPrice=this.totalAmnt*0.2
+    this.totalAmnt-=this.offerPrice
+    this.oStatus=true
+  }
+
+  discount10(){
+    this.offerPrice=this.totalAmnt*0.1
+    this.totalAmnt-=this.offerPrice
+    this.oStatus=true
+  }
 
   ngOnInit(): void {
     this.api.getCartApi().subscribe({
@@ -35,7 +61,8 @@ export class CartComponent implements OnInit {
     if (sessionStorage.getItem('token')) {
       this.api.removeFromCartApi(id).subscribe({
         next: (res: any) => {
-          console.log(res);
+          // console.log(res);
+          this.api.getCartCount()
           this.toastr.success("Deleted")
           this.ngOnInit()
         },
@@ -78,6 +105,7 @@ export class CartComponent implements OnInit {
         next: (res: any) => {
           // this.toastr.success("Quantity Updated")
           this.ngOnInit()
+          this.api.getCartCount()
         },
         error: (err) => {
           console.log(err);
@@ -89,7 +117,25 @@ export class CartComponent implements OnInit {
     }
   }
 
+  checkout(){
+    this.router.navigateByUrl('/checkout')
+    sessionStorage.setItem('totalAmount',this.totalAmnt)
+    // sessionStorage.setItem('totalAmount',Math.ceil(this.totalAmnt))
 
+  }
+
+  RemoveAllFromCart(){
+    this.api.emptycartApi().subscribe({
+      next:(res:any)=>{
+        // console.log(res);
+        this.toastr.success('Cart Cleared')
+        this.ngOnInit()
+      },
+      error:(err:any)=>{
+        console.log(err);
+      }
+    })
+  }
 
 
 }

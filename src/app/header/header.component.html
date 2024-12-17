@@ -18,19 +18,29 @@
           <li class="nav-item">
             <button class="nav-link border rounded" routerLink="/cart">
                 Cart
-                <span class="bagde bg-dark text-light px-1 rounded">0</span>
+                <span class="bagde bg-dark text-light px-1 rounded">{{cConut}}</span>
             </button>
           </li>
           
         </ul>
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success me-2" type="submit">Search</button>
+          <input class="form-control me-2" name="search" [(ngModel)]="searchkey" type="text" placeholder="Search Products.." aria-label="Search">
+          <button class="btn btn-warning d-flex align-items-center me-5" (click)="handleSearch()">
+            <i class="fa-solid fa-magnifying-glass me-1" style="color: #030303;"></i>
+            Search
+          </button>
         </form>
-        <a routerLink="/log" class="btn btn-success">
+        <span class="navbar-text  p-1  mx-3" *ngIf="user.length>0"  >
+          <i class="fa-solid fa-user"></i>
+          {{user}}
+        </span>
+        <a routerLink="/log" class="btn btn-success" *ngIf="user.length<=0">
             <i class="fa-solid fa-right-to-bracket me-1"></i>
             SignIn
         </a>
+        <button class="btn btn-danger" *ngIf="user.length>0" (click)="handleLogout()" >
+          Logout
+        </button>
       </div>
     </div>
   </nav>

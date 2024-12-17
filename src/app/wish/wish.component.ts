@@ -35,7 +35,7 @@ export class WishComponent implements OnInit {
     this.api.removeWishApi(id).subscribe({
       next:(res:any)=>{
         // console.log(res);
-        this.toastr.success("Deleted")
+        // this.toastr.success("Deleted")
         this.ngOnInit()
         this.api.getWishCount()
       },
@@ -46,6 +46,21 @@ export class WishComponent implements OnInit {
         }else{
           this.toastr.error("Deletion Failed")
         }
+      }
+    })
+  }
+
+  addToCart(data:any){
+    this.api.addToCartApi(data).subscribe({
+      next:(res:any)=>{
+        // console.log(res);
+        this.removeFromWish(data._id)
+        this.api.getCartCount()
+        this.toastr.success("Added To Cart")
+      },
+      error:(err:any)=>{
+        console.log(err);
+        this.toastr.error("Something Went Wrong")
       }
     })
   }

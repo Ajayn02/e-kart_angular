@@ -34,6 +34,7 @@ export class LogComponent {
         sessionStorage.setItem('token',res.token)
         sessionStorage.setItem('user',res.username)
         this.api.getWishCount()
+        this.api.getCartCount()
         this.toaster.success("Login Success")
         this.router.navigateByUrl('')
       },
